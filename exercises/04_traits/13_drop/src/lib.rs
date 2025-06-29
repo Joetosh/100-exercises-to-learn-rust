@@ -2,6 +2,29 @@
 //  unless a certain operation has been performed on it.
 //  You can see the expected API in the tests below.
 
+
+pub struct DropBomb {
+    pub status: String,
+}
+
+impl Drop for DropBomb{
+    fn drop(&mut self) {
+        if self.status == "Ticking..."{
+            panic!("BOOM!")
+        }
+    }
+}
+impl DropBomb{
+    fn new() -> Self{
+        DropBomb{status: "Ticking...".into()}
+    }
+    fn defuse(&mut self){
+        if self.status == "Ticking..."{
+            self.status = "Bomb_has_been_defused.mp3".into()
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
